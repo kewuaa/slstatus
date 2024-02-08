@@ -69,6 +69,7 @@ static const struct arg args[] = {
     {wifi_perc, "󰒢 %s%% ", "wlp2s0"},
     {battery_state, "%s  ", "BAT1"},
     {battery_perc, "%s%% ", "BAT1"},
+    {vol_perc, " %s ", "Master"},
     {ram_perc, "󰍛 %s%% ", NULL},
     {ram_used, "%s ", NULL},
     {cpu_perc, " %s%% ", NULL},
