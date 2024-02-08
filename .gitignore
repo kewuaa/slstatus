@@ -1,2 +1,4 @@
 *.o
+*.rej
+*.orig
 slstatus
