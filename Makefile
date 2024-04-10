@@ -44,7 +44,8 @@ slstatus: slstatus.o $(COM:=.o) $(REQ:=.o)
 	$(CC) -o $@ $(LDFLAGS) $(COM:=.o) $(REQ:=.o) slstatus.o $(LDLIBS)
 
 clean:
-	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o) slstatus-${VERSION}.tar.gz
+	rm -rf src pkg
+	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o) slstatus-${VERSION}.tar.gz *.zst
 
 dist:
 	rm -rf "slstatus-$(VERSION)"
@@ -67,3 +68,6 @@ install: all
 uninstall:
 	rm -f "$(DESTDIR)$(PREFIX)/bin/slstatus"
 	rm -f "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
+
+install-to-arch: PKGBUILD
+	makepkg -i --asdeps
