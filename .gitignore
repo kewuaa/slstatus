@@ -1,7 +1,7 @@
 *.o
 *.rej
 *.orig
-slstatus
+libslstatus.so
 /src
 /pkg
 *.zst

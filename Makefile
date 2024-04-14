@@ -15,8 +15,6 @@ COM =\
 	components/hostname\
 	components/ip\
 	components/kernel_release\
-	components/keyboard_indicators\
-	components/keymap\
 	components/load_avg\
 	components/netspeeds\
 	components/num_files\
@@ -32,19 +30,19 @@ COM =\
 all: slstatus
 
 $(COM:=.o): config.mk $(REQ:=.h) slstatus.h
-slstatus.o: slstatus.c slstatus.h arg.h config.h config.mk $(REQ:=.h)
+slstatus.o: slstatus.c slstatus.h config.h config.mk $(REQ:=.h)
 
 .c.o:
-	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $<
+	$(CC) -o $@ -c $(CPPFLAGS) $(CFLAGS) $< -fPIC
 
 config.h:
 	cp config.def.h $@
 
 slstatus: slstatus.o $(COM:=.o) $(REQ:=.o)
-	$(CC) -o $@ $(LDFLAGS) $(COM:=.o) $(REQ:=.o) slstatus.o $(LDLIBS)
+	$(CC) -shared -o libslstatus.so $(LDFLAGS) $(COM:=.o) $(REQ:=.o) slstatus.o $(LDLIBS)
 
 clean:
-	rm -f slstatus slstatus.o $(COM:=.o) $(REQ:=.o) slstatus-${VERSION}.tar.gz
+	rm -f libslstatus.so slstatus.o $(COM:=.o) $(REQ:=.o) slstatus-${VERSION}.tar.gz
 
 dist:
 	rm -rf "slstatus-$(VERSION)"
@@ -57,16 +55,11 @@ dist:
 	rm -rf "slstatus-$(VERSION)"
 
 install: all
-	mkdir -p "$(DESTDIR)$(PREFIX)/bin"
-	cp -f slstatus "$(DESTDIR)$(PREFIX)/bin"
-	chmod 755 "$(DESTDIR)$(PREFIX)/bin/slstatus"
-	mkdir -p "$(DESTDIR)$(MANPREFIX)/man1"
-	cp -f slstatus.1 "$(DESTDIR)$(MANPREFIX)/man1"
-	chmod 644 "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
+	mkdir -p "$(DESTDIR)$(PREFIX)/lib"
+	cp -f libslstatus.so "$(DESTDIR)$(PREFIX)/lib"
 
 uninstall:
 	rm -f "$(DESTDIR)$(PREFIX)/bin/slstatus"
-	rm -f "$(DESTDIR)$(MANPREFIX)/man1/slstatus.1"
 
 install-to-arch: PKGBUILD
 	makepkg -i --asdeps

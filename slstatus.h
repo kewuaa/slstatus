@@ -34,12 +34,6 @@ const char *ipv6(const char *interface);
 /* kernel_release */
 const char *kernel_release(const char *unused);
 
-/* keyboard_indicators */
-const char *keyboard_indicators(const char *fmt);
-
-/* keymap */
-const char *keymap(const char *unused);
-
 /* load_avg */
 const char *load_avg(const char *unused);
 
