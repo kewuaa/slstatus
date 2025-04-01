@@ -10,7 +10,7 @@ MANPREFIX = $(PREFIX)/share/man
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -DVERSION=\"${VERSION}\" -DALSA
 CFLAGS   = -std=c99 -pedantic -Wall -Wextra -Wno-unused-parameter -Os
-LDFLAGS  = -s -lasound
+LDFLAGS  = -lasound
 # OpenBSD: add -lsndio
 # FreeBSD: add -lkvm -lsndio
 
