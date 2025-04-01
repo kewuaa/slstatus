@@ -59,7 +59,7 @@ install: all
 	cp -f libslstatus.so "$(DESTDIR)$(PREFIX)/lib"
 
 uninstall:
-	rm -f "$(DESTDIR)$(PREFIX)/bin/slstatus"
+	rm -f "$(DESTDIR)$(PREFIX)/lib/libslstatus.so"
 
 install-to-arch: PKGBUILD
 	makepkg -i --asdeps
