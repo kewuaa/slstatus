@@ -1,4 +1,4 @@
-pkgname=slstatus_wayland
+pkgname=slstatus-dwl
 pkgver="0.1.0"
 pkgrel=1
 arch=("x86_64")
